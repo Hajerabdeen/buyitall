@@ -7,7 +7,7 @@ import Joi from "joi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { apiUrl } from "../../Constant/api";
+import { apiUrl ,baseUrl } from "../../Constant/api";
 
 export default function SignUp() {
   let [data, setData] = useState({
@@ -105,6 +105,8 @@ export default function SignUp() {
         .then((res) => {
           setValidationErrors([]);
           setErrors("");
+          console.log("Current Environment:", process.env.NODE_ENV);
+          console.log("Base URL:", baseUrl);
           // if success redirect to login
           navigate("/login");
         })

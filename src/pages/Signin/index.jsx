@@ -58,7 +58,7 @@ export default function Login({saveUserData}) {
      setValidationErrors(checkErrors.error.details);
    } else {
      axios
-       .post(apiUrl("Login"), data)
+       .post(apiUrl("Register"), data)
        .then((res) => {
          localStorage.setItem("token", res.data.jwt);
          saveUserData();
