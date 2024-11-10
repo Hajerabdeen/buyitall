@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import facebook from "../../images/icons8-facebook-50.png";
 import google from "../../images/icons8-google-50.png";
 import apple from "../../images/icons8-apple-50.png";
-
+import { apiUrl } from "../../Constant/api";
 
 export default function Login({saveUserData}) {
   let [data, setData] = useState({
@@ -58,7 +58,7 @@ export default function Login({saveUserData}) {
      setValidationErrors(checkErrors.error.details);
    } else {
      axios
-       .post(`http://hawas.runasp.net/api/v1/Login`, data)
+       .post(apiUrl("Login"), data)
        .then((res) => {
          localStorage.setItem("token", res.data.jwt);
          saveUserData();

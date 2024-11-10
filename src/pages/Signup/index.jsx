@@ -7,6 +7,7 @@ import Joi from "joi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../Constant/api";
 
 export default function SignUp() {
   let [data, setData] = useState({
@@ -100,7 +101,7 @@ export default function SignUp() {
       setValidationErrors(checkErros.error.details);
     } else {
       axios
-        .post(`http://hawas.runasp.net/api/v1/Register`, data)
+        .post(apiUrl("Register"), data)
         .then((res) => {
           setValidationErrors([]);
           setErrors("");
@@ -108,7 +109,11 @@ export default function SignUp() {
           navigate("/login");
         })
         .catch((err) => {
-          setErrors(err.response.data);
+          if (err.response && err.response.data) {
+            setErrors(err.response.data);
+          } else {
+            setErrors("An error occurred. Please try again later.");
+          }
           setValidationErrors([]);
         });
     }
